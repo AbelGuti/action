@@ -24,7 +24,8 @@ jobs:
           cd ../
           zip -r ${{matrix.environment}}-notification.zip action -x ".git/*" ".github/*"
           ls -la
+          mv ${{matrix.environment}}-notification.zip action/
       - uses: actions/upload-artifact@v4
         with:
           name: ${{matrix.environment}}-notification
-          path: ../${{matrix.environment}}-notification.zip
+          path: ${{matrix.environment}}-notification.zip
