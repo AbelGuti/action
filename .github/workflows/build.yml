@@ -20,8 +20,6 @@ jobs:
           mkdir dir
           touch dir/test
       - name: Create Archive
-        env:
-          TAG: test
         run: |          
           cd ../
           rm -rf action.zip
