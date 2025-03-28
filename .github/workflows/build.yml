@@ -37,16 +37,28 @@ jobs:
       - build-hive
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
+      - name: Get branch names
+        id: branch
+        uses: tj-actions/branch-names@v6
+
       - name: Download MacOS ARM64 Iris
+        env:
+          GH_TAG: ${{steps.branch.outputs.tag}}
         uses: actions/download-artifact@v4
         with:
           name: iris-notification
           path: artifacts/
+
       - name: Download MacOS ARM64 Hive
+        env:
+          GH_TAG: ${{steps.branch.outputs.tag}}
         uses: actions/download-artifact@v4
         with:
           name: hive-notification
           path: artifacts/
+
       - name: Publish
         uses: softprops/action-gh-release@v1
         with:
