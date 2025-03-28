@@ -29,3 +29,26 @@ jobs:
         with:
           name: ${{matrix.environment}}-notification
           path: ${{matrix.environment}}-notification.zip
+  publish:
+    permissions:
+      contents: write
+      actions: write
+    needs:
+      - build-hive
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download MacOS ARM64 Iris
+        uses: actions/download-artifact@v4
+        with:
+          name: iris-notification
+          path: artifacts/
+      - name: Download MacOS ARM64 Hive
+        uses: actions/download-artifact@v4
+        with:
+          name: hive-notification
+          path: artifacts/
+      - name: Publish
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            artifacts/*-notification.zip
