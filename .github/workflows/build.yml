@@ -27,4 +27,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: ${{matrix.environment}}-notification
-          path: ${{matrix.environment}}-notification.zip
+          path: ../${{matrix.environment}}-notification.zip
