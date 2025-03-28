@@ -22,9 +22,9 @@ jobs:
       - name: Create Archive
         run: |
           cd ../
-          rm -rf action.zip
           zip -r ${{matrix.environment}}-notification.zip action -x ".git/*" ".github/*"
+          ls -la
       - uses: actions/upload-artifact@v4
         with:
           name: ${{matrix.environment}}-notification
-          path: ${{matrix.environment}}-notification-*.zip
+          path: ${{matrix.environment}}-notification.zip
