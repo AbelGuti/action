@@ -20,10 +20,10 @@ jobs:
           mkdir dir
           touch dir/test
       - name: Create Archive
-        run: |          
+        run: |
           cd ../
           rm -rf action.zip
-          zip -r action.zip action -x ".git/*" ".github/*
+          zip -r action.zip action -x ".git/*" ".github/*"
       - uses: actions/upload-artifact@v4
         with:
           name: ${{matrix.environment}}-notification-windows-amd64
