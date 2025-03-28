@@ -1,0 +1,32 @@
+name: Electron Build
+
+on:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  build-hive:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: ['iris', 'hive']
+    steps:
+      - name: Cloning Repository
+        uses: actions/checkout@v3
+      - name: Building frontend
+        run: |
+          touch ${{matrix.environment}}
+          mkdir dir
+          touch dir/test
+      - name: Create Archive
+        env:
+          TAG: test
+        run: |          
+          cd ../
+          rm -rf action.zip
+          zip -r action.zip action -x ".git/*" ".github/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{matrix.environment}}-notification-windows-amd64
+          path: ${{matrix.environment}}-notification-*.tar.zst
